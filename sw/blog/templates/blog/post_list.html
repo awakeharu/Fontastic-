@@ -11,7 +11,7 @@
 	</head>
 
 	<body class = "is-loading">
-
+		{% block content %}
 		<div id = "wrapper" class = "fade-in">
 			<!--INTRO-->
 			<div id = "intro">
@@ -65,9 +65,9 @@
 					<thead>
 						<tr>
 							<th scope="col">제목</th>
-							<th scope="col">글쓴이</th>
+							<th scope="col">내용</th>
 							<th scope="col">날짜</th>
-							<th scope="col">조회수</th>
+							<th scope="col">댓글</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -75,7 +75,7 @@
 							<td class ="title_board">
 								<a href="#">게시판 제목</a>
 							</td>
-							<td class="name_board">글쓴이 이름</td>
+							<td class="name_board">내용</td>
 							<td class="date_board">0000/00/00</td>
 							<td class="hit_board">0</td>
 						</tr>
@@ -84,9 +84,14 @@
 							<td class="title_board" style="padding-left:30px;">
 								<a href="#">{{ post.title }}</a>
 							</td>
-							<td class="name_board"><a href="#">{{ post.content }}</a>
+							<td class="name_board"><a href="#">{{ post.content|linebreaks }}
+								{% for comment in post.comment_set.all %}
+								{{ comment.message }}
+								{% endfor %}</a>
 							</td>
 							<td class="date_board"><a href="#">{{ post.created_at }}</a>
+							</td>
+							<td><a href="{% url "blog:comment_new" post.pk %}"  class="btn btn-primary">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
@@ -96,6 +101,7 @@
 				</div>
 
 			<!--Q&A-->
+
 				<div id="Q_A">
 					<h2>Q&A</h2>
 					<table class = "sub_news" border = "1" cellspacing ="0" summary="게시판">
@@ -108,9 +114,9 @@
 					<thead>
 						<tr>
 							<th scope="col">제목</th>
-							<th scope="col">글쓴이</th>
+							<th scope="col">내용</th>
 							<th scope="col">날짜</th>
-							<th scope="col">조회수</th>
+							<th scope="col">댓글</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -118,7 +124,7 @@
 							<td class ="title_board">
 								<a href="#">게시판 제목</a>
 							</td>
-							<td class="name_board">글쓴이 이름</td>
+							<td class="name_board">내용</td>
 							<td class="date_board">0000/00/00</td>
 							<td class="hit_board">0</td>
 						</tr>
@@ -127,14 +133,21 @@
 							<td class="title_board" style="padding-left:30px;">
 								<a href="#">{{ post.title }}</a>
 							</td>
-							<td class="name_board"><a href="#">{{ post.content }}</a>
+							<td class="name_board"><a href="#">{{ post.content|linebreaks }}
+								{% for comment in post.comment_set.all %}
+								{{ comment.message }}
+								{% endfor %}</a>
 							</td>
 							<td class="date_board"><a href="#">{{ post.created_at }}</a>
+							</td>
+							<td><a href="{% url "blog:comment_new" post.pk %}"  class="btn btn-primary">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
 					</tbody>
 					</table>
+				
+					
 				</div>
 			
 			<!--request-->
@@ -150,9 +163,9 @@
 					<thead>
 						<tr>
 							<th scope="col">제목</th>
-							<th scope="col">글쓴이</th>
+							<th scope="col">내용</th>
 							<th scope="col">날짜</th>
-							<th scope="col">조회수</th>
+							<th scope="col">댓글</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -160,7 +173,7 @@
 							<td class ="title_board">
 								<a href="#">게시판 제목</a>
 							</td>
-							<td class="name_board">글쓴이 이름</td>
+							<td class="name_board">내용</td>
 							<td class="date_board">0000/00/00</td>
 							<td class="hit_board">0</td>
 						</tr>
@@ -169,9 +182,14 @@
 							<td class="title_board" style="padding-left:30px;">
 								<a href="#">{{ post.title }}</a>
 							</td>
-							<td class="name_board"><a href="#">{{ post.content }}</a>
+							<td class="name_board"><a href="#">{{ post.content|linebreaks }}
+								{% for comment in post.comment_set.all %}
+								{{ comment.message }}
+								{% endfor %}</a>
 							</td>
 							<td class="date_board"><a href="#">{{ post.created_at }}</a>
+							</td>
+							<td><a href="{% url "blog:comment_new" post.pk %}"  class="btn btn-primary">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
@@ -180,6 +198,7 @@
 				</div>
 			</div>
 		</div>
+		{% endblock %}
 	
 	<script src="{% static 'js/jquery.min.js' %}"></script>
 			<script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
