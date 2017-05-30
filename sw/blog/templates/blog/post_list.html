@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -24,7 +25,7 @@
 
 		<!--Header-->
 			<header id = "header">
-				<a href= "FonTastic.html" class = "logo">FonTstic</a>
+				<a href= "FonTastic.html" class = "logo">FONTASTIC</a>
 			</header>
 
 			<nav id = "nav">
@@ -35,6 +36,10 @@
 					<li><a href ="#Q_A">Q&A</a></li>
 					<li><a href ="#request">REQUEST</a></li>
 				</ul>
+					<ul class="links right">
+          				<li><a href="{% url "login" %}">Login</a></li>
+          			</ul>
+				
 			</nav>
 		<!--main-->
 			<div id = "main">

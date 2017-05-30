@@ -1,3 +1,4 @@
+{% extends "accounts/layout.html" %}
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
@@ -10,5 +11,6 @@
 <hr/>
 
 {{ post.content }}
+<hr />
 <a href="{% url "blog:index" %}" class="btn btn-default">목록으로</a>
 {% endblock %}
