@@ -2780,9 +2780,11 @@
 	table {
 		margin: 0 0 2rem 0;
 		width: 100%;
+		font-family: "Source Sans Pro", Helvetica, sans-serif;
 	}
-
+	
 		table tbody tr {
+			font-family: "Source Sans Pro", Helvetica, sans-serif;
 			border: solid 1px;
 			border-left: 0;
 			border-right: 0;
@@ -2790,6 +2792,7 @@
 
 		table td {
 			padding: 0.75rem 0.75rem;
+			font-family: "Source Sans Pro", Helvetica, sans-serif;
 		}
 
 		table th {
