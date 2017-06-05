@@ -1,7 +1,12 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-fdir='batang.txt'
-documents=open(fdir, 'r')
-tfidf=TfidfVectorizer().fit_transform(documents)
+def vectorization(font_pixel):
+	documents=open(font_pixel, 'r')
+	tfidf=TfidfVectorizer().fit_transform(documents)
 
-print(tfidf)
+	return tfidf
+
+font='batang.txt'
+vectored_font=vectorization(font)
+
+print(vectored_font)

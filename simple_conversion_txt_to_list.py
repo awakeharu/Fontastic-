@@ -1,0 +1,5 @@
+text_file=open('batang.txt', 'r')
+lines=text_file.readlines()
+print(lines)
+print(len(lines))
+text_file.close()
