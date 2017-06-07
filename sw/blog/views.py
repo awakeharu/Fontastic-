@@ -1,8 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Post, Comment
-from .forms import CommentForm,UploadFileForm
+from .forms import CommentForm, PostForm
 from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
+
 
 
 def index(request):
@@ -16,6 +18,21 @@ def post_detail(request, pk):
 	return render(request, 'blog/post_detail.html', {
 			'post' : post,
 		})
+
+@login_required
+def post_new(request):
+	if request.method=="POST":
+		form = PostForm(request.POST, request.FILES)
+		if form.is_valid():
+			form = form.save(commit=False)
+			form.save()
+			return redirect('blog:post_detail' , form.pk)
+	else:
+		form = PostForm()
+	return render(request, "blog/post_form.html",{
+		"form":form,
+		})
+	
 
 @login_required
 def comment_new(request, post_pk):
@@ -66,15 +83,6 @@ def comment_delete(request, post_pk, pk):
 			'comment': comment,
 	})
 
-@login_required
-def upload_file(request):
-	if request.method == 'POST':
-		form = UploadFileForm(request.POST, request.FILES)
-		if form.is_valid():
-			form.save()
-			return HttpResponseRedirect('/success/url/')
-	else:
-		form = UploadFileForm();
-	return render(request, 'post_list.html', {'form':form})
+#파일 업로드
 
 # Create your views here.
