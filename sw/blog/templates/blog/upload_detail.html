@@ -1,0 +1,13 @@
+{% extends "accounts/layout.html" %}
+
+
+{% block content %}
+<h1>Upload</h1>
+
+{% if upload.photo %}
+	<img src="{{ post.photo.url }}" />
+{% endif %}
+<hr />
+
+<a href="{% url "blog:index" %}" class="btn btn-primary">목록으로</a>
+{% endblock %}

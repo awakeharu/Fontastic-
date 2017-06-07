@@ -18,4 +18,9 @@ urlpatterns = [
 
 	url(r'^question_new/$',views.question_new, name='question_new'),
 	url(r'^(?P<pk>\d+)/question/$',views.question_detail, name='question_detail'),
+
+	url(r'^upload_new/$',views.upload_new, name='upload_new'),
+	url(r'^(?P<pk>\d+)/upload/$',views.upload_detail, name='upload_detail'),
+
+
 ]

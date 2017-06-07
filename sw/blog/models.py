@@ -60,6 +60,12 @@ class Request(models.Model):
 
     class Meta:
     	ordering=['id']
+
+class Upload(models.Model):
+	photo = models.ImageField()
+
+	class Meta:
+		ordering=['id']
  
 
 # Create your models here.

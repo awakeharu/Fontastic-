@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Post, Comment ,Question , Request
-from .forms import CommentForm, PostForm , RequestForm, QuestionForm
+from .models import Post, Comment ,Question , Request , Upload
+from .forms import CommentForm, PostForm , RequestForm, QuestionForm , UploadForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -34,6 +34,12 @@ def request_detail(request, pk):
 	request = get_object_or_404(Request, pk=pk)
 	return render(request, 'blog/request_detail.html', {
 			'request' : request,
+		})
+
+def upload_detail(request, pk):
+	request = get_object_or_404(Request, pk=pk)
+	return render(request, 'blog/upload_detail.html', {
+			'upload' : upload,
 		})
 
 @login_required
@@ -127,6 +133,17 @@ def request_new(request):
 	return render(request, "blog/request_form.html",{
 		"form":form,
 		})
+
+def upload_new(request):
+	if request.method=="POST":
+		form = UploadForm(request.POST, request.FILES)
+		if form.is_valid():
+			form = form.save(commit=False)
+			form.save()
+			return redirect('blog:upload_detail', form.pk)
+	else:
+		form = UploadForm()
+	return render(request, "blog/upload_form.html",{"form":form,})
 #파일 업로드
 
 # Create your views here.

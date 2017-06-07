@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,Question,Request
+from .models import Post,Question,Request,Upload
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
@@ -15,6 +15,11 @@ class question_board_Admin(admin.ModelAdmin):
 class request_board_Admin(admin.ModelAdmin):
 	list_display=['id','title','created_at']
 	list_display_links = ['title']
+
+@admin.register(Upload)
+class UploadAdmin(admin.ModelAdmin):
+	list_display = ['id','photo']
+	list_display_links = ['id']
 
 
 
