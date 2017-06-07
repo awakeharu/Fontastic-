@@ -12,4 +12,10 @@ urlpatterns = [
 
 
 	url(r'^post_new/$', views.post_new , name='post_new'),
+
+	url(r'^request_new/$',views.request_new, name='request_new'),
+	url(r'^(?P<pk>\d+)/request/$', views.request_detail, name='request_detail'),
+
+	url(r'^question_new/$',views.question_new, name='question_new'),
+	url(r'^(?P<pk>\d+)/question/$',views.question_detail, name='question_detail'),
 ]

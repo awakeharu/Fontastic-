@@ -36,25 +36,30 @@ class Comment(models.Model):
 	def get_delete_url(self):
 		return reverse('blog:comment_delete', args=[self.post.pk, self.pk])
 
-class question_board(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+class Question(models.Model):
     title = models.CharField(max_length=30)
     contents = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-    	return self.title
+        return self.title
 
-class request_board(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL)
+    class Meta:
+    	ordering=['id']
+
+
+class Request(models.Model):
     title = models.CharField(max_length=30)
     contents = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-		return self.title 
+        return self.title
+
+    class Meta:
+    	ordering=['id']
  
 
 # Create your models here.

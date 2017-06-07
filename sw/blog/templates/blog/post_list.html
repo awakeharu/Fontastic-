@@ -150,13 +150,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for post in post_list %}
+						{% for question in question_list %}
 						<tr class="reply_borad">
 							<td class="title_board" style="padding-left:30px;">
-								<a href="{% url "blog:post_detail" post.pk%}">{{ post.title }}</a>
+								<a href="{% url "blog:question_detail" question.pk %}">{{ question.title }}</a>
 							</td>
-							<td class="name_board"><a href="{% url "blog:post_detail" post.pk %}">{{ post.content|linebreaks }}
-								{% for comment in post.comment_set.all %}
+							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.content|linebreaks }}
+								{% for comment in question.comment_set.all %}
 									<li>{{ comment.message }}<br />
 										by {{ comment.author }}<br />
 										at {{ comment.created_at }}
@@ -168,14 +168,14 @@
 								</a></li>
 								{% endfor %}</a>
 							</td>
-							<td class="date_board"><a href="#">{{ post.created_at }}</a>
+							<td class="date_board"><a href="#">{{ question.created_at }}</a>
 							</td>
-							<td><a href="{% url "blog:comment_new" post.pk %}"  class="logo">댓글쓰기</a>
+							<td><a href="{% url "blog:comment_new" question.pk %}"  class="logo">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
 						<tr>
-							<td><a href="{% url "blog:post_new" %}"  class="logo">글쓰기</a>
+							<td><a href="{% url "blog:question_new" %}"  class="logo">글쓰기</a>
 							</td>
 						</tr>
 						
@@ -204,13 +204,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for post in post_list %}
+						{% for request in request_list %}
 						<tr class="reply_borad">
 							<td class="title_board" style="padding-left:30px;">
-								<a href="{% url "blog:post_detail" post.pk %}">{{ post.title }}</a>
+								<a href="{% url "blog:request_detail" request.pk %}">{{ request.title }}</a>
 							</td>
-							<td class="name_board"><a href="{% url "blog:post_detail" post.pk %}">{{ post.content|linebreaks }}
-								{% for comment in post.comment_set.all %}
+							<td class="name_board"><a href="{% url "blog:request_detail" request.pk %}">{{ request.content|linebreaks }}
+								{% for comment in request.comment_set.all %}
 									<li>{{ comment.message }}<br />
 										by {{ comment.author }}<br/>
 										at {{ comment.created_at }}
@@ -223,14 +223,14 @@
 							</li>
 								{% endfor %}</a>
 							</td>
-							<td class="date_board"><a href="#">{{ post.created_at }}</a>
+							<td class="date_board"><a href="#">{{ request.created_at }}</a>
 							</td>
-							<td><a href="{% url "blog:comment_new" post.pk %}"  class="logo">댓글쓰기</a>
+							<td><a href="{% url "blog:comment_new" request.pk %}"  class="logo">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
 						<tr>
-							<td><a href="{% url "blog:post_new" %}"  class="logo">글쓰기</a>
+							<td><a href="{% url "blog:request_new" %}"  class="logo">글쓰기</a>
 							</td>
 						</tr>
 						
