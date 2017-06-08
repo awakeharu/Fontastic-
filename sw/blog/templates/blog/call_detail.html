@@ -28,5 +28,5 @@
 {% endfor %}
 <hr />
 <a href="{% url "blog:index" %}" class="btn btn-primary">목록으로</a>
-<a href="{% url "blog:comment_new" request.pk %}"  class="btn btn-primary">댓글쓰기</a>
+<a href="{% url "blog:comment_new" call.pk %}"  class="btn btn-primary">댓글쓰기</a>
 {% endblock %}

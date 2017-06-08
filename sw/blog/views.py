@@ -20,8 +20,12 @@ def index(request):
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
+	question = get_object_or_404(Question, pk=pk)
+	call = get_object_or_404(Call, pk=pk)
 	return render(request, 'blog/post_detail.html', {
 			'post' : post,
+			'call' : call,
+			'question':question,
 		})
 
 def question_detail(request, pk):
