@@ -40,14 +40,9 @@ INSTALLED_APPS = [
     'accounts',
     'blog',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'django.contrib.sites',
-    'accounts.providers.kakao',
 ]
 
-SITE_ID = 1
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
