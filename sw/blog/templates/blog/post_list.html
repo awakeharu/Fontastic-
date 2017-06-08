@@ -68,16 +68,14 @@
 			<!--find font-->
 				<div id="find_font">
 					<h2>FIND FONT</h2>
-		
-						<center><button><a href="{% url "blog:upload_new" %}"  class="logo">UPLOAD</a></button></center>
-				
-					<center><input type="button" name="bt_find" value="FIND" id="bt_find"></center>
+						<center><h4><a href="{% url "blog:upload_new" %}" class="actions">UPLOAD</a></h4></center>
+					<center><input type="submit" name="bt_find" value="FIND" id="bt_find"></center>
 				</div>
 			
 			<!--board-->
 			<div id="section">
 				<div id ="board">
-					<h2>BOARD / <span><a href ="#nav" class="actions scrolly">MENU로 돌아가기</a></span></h2>
+					<h2>BOARD | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
 					<table border = "1" cellspacing ="0" summary="게시판">
 						<colgroup>
 						<col width="150">
@@ -121,10 +119,10 @@
 						</tr>
 						{% endfor %}
 					
-						<tr>
-							<td><a href="{% url "blog:post_new" %}"  class="logo">글쓰기</a>
-							</td>
-						</tr>
+						
+						<button><a href="{% url "blog:post_new" %}"  class="logo">글쓰기</a></button>
+							
+						
 						
 					</tbody>
 					</table>
@@ -133,7 +131,7 @@
 			<!--Q&A-->
 
 				<div id="Q_A">
-					<h2>Q&A / <span><a href ="#nav" class="actions scrolly">MENU로 돌아가기</a></span></h2>
+					<h2>Q&A | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
 					<table border = "1" cellspacing ="0" summary="게시판">
 						<colgroup>
 						<col width="150">
@@ -155,7 +153,7 @@
 							<td class="title_board" style="padding-left:30px;">
 								<a href="{% url "blog:question_detail" question.pk %}">{{ question.title }}</a>
 							</td>
-							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.content|linebreaks }}
+							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.contents|linebreaks }}
 								{% for comment in question.comment_set.all %}
 									<li>{{ comment.message }}<br />
 										by {{ comment.author }}<br />
@@ -174,10 +172,10 @@
 							</td>
 						</tr>
 						{% endfor %}
-						<tr>
-							<td><a href="{% url "blog:question_new" %}"  class="logo">글쓰기</a>
-							</td>
-						</tr>
+						
+						<button><a href="{% url "blog:question_new" %}"  class="logo">글쓰기</a></button>
+							
+						
 						
 					</tbody>
 					</table>
@@ -187,7 +185,7 @@
 			
 			<!--request-->
 				<div id="request">
-					<h2>REQUEST / <span><a href ="#nav" class="actions scrolly">MENU로 돌아가기</a></span></h2>
+					<h2>REQUEST | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
 					<table border = "1" cellspacing ="0" summary="게시판">
 						<colgroup>
 						<col width="150">
@@ -204,13 +202,13 @@
 						</tr>
 					</thead>
 					<tbody>
-						{% for request in request_list %}
+						{% for call in call_list %}
 						<tr class="reply_borad">
 							<td class="title_board" style="padding-left:30px;">
-								<a href="{% url "blog:request_detail" request.pk %}">{{ request.title }}</a>
+								<a href="{% url "blog:call_detail" call.pk%}">{{ call.title }}</a>
 							</td>
-							<td class="name_board"><a href="{% url "blog:request_detail" request.pk %}">{{ request.content|linebreaks }}
-								{% for comment in request.comment_set.all %}
+							<td class="name_board"><a href="{% url "blog:call_detail" call.pk %}">{{ call.contents|linebreaks }}
+								{% for comment in call.comment_set.all %}
 									<li>{{ comment.message }}<br />
 										by {{ comment.author }}<br/>
 										at {{ comment.created_at }}
@@ -223,17 +221,14 @@
 							</li>
 								{% endfor %}</a>
 							</td>
-							<td class="date_board"><a href="#">{{ request.created_at }}</a>
+							<td class="date_board"><a href="#">{{ call.created_at }}</a>
 							</td>
-							<td><a href="{% url "blog:comment_new" request.pk %}"  class="logo">댓글쓰기</a>
+							<td><a href="{% url "blog:comment_new" call.pk %}" class="logo">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
-						<tr>
-							<td><a href="{% url "blog:request_new" %}"  class="logo">글쓰기</a>
-							</td>
-						</tr>
 						
+						<button><a href="{% url "blog:call_new" %}" class="logo">글쓰기</a></button>
 					</tbody>
 					</table>
 				</div>

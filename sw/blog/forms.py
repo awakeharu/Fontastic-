@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comment, Post, Question, Request , Upload
+from .models import Comment, Post, Question, Call , Upload
 
 class CommentForm(forms.ModelForm):
 	class Meta:
@@ -22,9 +22,9 @@ class QuestionForm(forms.ModelForm):
 			'contents',
 		]
 
-class RequestForm(forms.ModelForm):
+class CallForm(forms.ModelForm):
 	class Meta:
-		model = Request
+		model = Call
 		fields = [
 			'title',
 			'contents',

@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Post, Comment ,Question , Request , Upload
-from .forms import CommentForm, PostForm , RequestForm, QuestionForm , UploadForm
+from .models import Post, Comment ,Question , Call , Upload
+from .forms import CommentForm, PostForm , CallForm, QuestionForm , UploadForm
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
@@ -10,11 +10,11 @@ from django.core.urlresolvers import reverse
 def index(request):
 	post_list = Post.objects.all()
 	question_list = Question.objects.all()
-	request_list = Request.objects.all()
+	call_list = Call.objects.all()
 	return render(request, 'blog/post_list.html', {
 		'post_list' : post_list,
 		'question_list':question_list,
-		'request_list':request_list,
+		'call_list':call_list,
 
 	})
 
@@ -30,10 +30,10 @@ def question_detail(request, pk):
 			'question' : question,
 		})
 
-def request_detail(request, pk):
-	request = get_object_or_404(Request, pk=pk)
-	return render(request, 'blog/request_detail.html', {
-			'request' : request,
+def call_detail(request, pk):
+	call = get_object_or_404(Call, pk=pk)
+	return render(request, 'blog/call_detail.html', {
+			'call' : call,
 		})
 
 def upload_detail(request, pk):
@@ -121,19 +121,20 @@ def question_new(request):
 		})
 
 @login_required
-def request_new(request):
+def call_new(request):
 	if request.method=="POST":
-		form = RequestForm(request.POST, request.FILES)
+		form = CallForm(request.POST, request.FILES)
 		if form.is_valid():
 			form = form.save(commit=False)
 			form.save()
-			return redirect('blog:request_detail' , form.pk)
+			return redirect('blog:call_detail' , form.pk)
 	else:
-		form = RequestForm()
-	return render(request, "blog/request_form.html",{
+		form = CallForm()
+	return render(request, "blog/call_form.html",{
 		"form":form,
 		})
 
+@login_required
 def upload_new(request):
 	if request.method=="POST":
 		form = UploadForm(request.POST, request.FILES)
@@ -143,7 +144,8 @@ def upload_new(request):
 			return redirect('blog:upload_detail', form.pk)
 	else:
 		form = UploadForm()
-	return render(request, "blog/upload_form.html",{"form":form,})
+	return render(request, "blog/upload_form.html",{"form":form})
+
 #파일 업로드
 
 # Create your views here.

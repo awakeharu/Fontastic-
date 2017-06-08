@@ -1,5 +1,7 @@
 from django.conf.urls import url
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
 	url(r'^$', views.index, name='index'),
@@ -13,8 +15,8 @@ urlpatterns = [
 
 	url(r'^post_new/$', views.post_new , name='post_new'),
 
-	url(r'^request_new/$',views.request_new, name='request_new'),
-	url(r'^(?P<pk>\d+)/request/$', views.request_detail, name='request_detail'),
+	url(r'^call_new/$',views.call_new, name='call_new'),
+	url(r'^(?P<pk>\d+)/call/$',views.call_detail, name='call_detail'),
 
 	url(r'^question_new/$',views.question_new, name='question_new'),
 	url(r'^(?P<pk>\d+)/question/$',views.question_detail, name='question_detail'),

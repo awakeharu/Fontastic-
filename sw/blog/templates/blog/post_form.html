@@ -1,30 +1,5 @@
 {% extends "layout.html" %}
 
-
-{% block form %}
-
-    <div>
-      <div class="container">
-        <div class="row">
-          	<div class="col-sm-4">
-            	<div class="col-sm-8 hidden-xs">
-          	 		<form method="POST" action="" enctype="multipart/form-data">
-            			{% csrf_token %}
-            			{{ form.as_table }}
-            			<button class="btn btn-primary" type="submit">저장</button>
-        			</form>
-            	<ul>
-              		<li><a href="{% url "blog:index" %}" class="btn btn-primary">목록으로</a>
-              		</li>
-            	</ul>
-          </div>
-        </div> <!-- / .row -->
-     <!-- </div> <!-- / .container -->
-    <!--</div>
-   </div>
-{% endblock %}-->
-
-{% block title %}{{ post.title }}{% endblock %}
 {% block content %}
 <div class="col-sm-12">
 </div>

@@ -49,7 +49,7 @@ class Question(models.Model):
     	ordering=['id']
 
 
-class Request(models.Model):
+class Call(models.Model):
     title = models.CharField(max_length=30)
     contents = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -62,7 +62,7 @@ class Request(models.Model):
     	ordering=['id']
 
 class Upload(models.Model):
-	photo = models.ImageField()
+	photo = models.FileField()
 
 	class Meta:
 		ordering=['id']
