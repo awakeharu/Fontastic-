@@ -154,28 +154,26 @@
 								<a href="{% url "blog:question_detail" question.pk %}">{{ question.title }}</a>
 							</td>
 							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.contents|linebreaks }}
-								{% for comment in question.comment_set.all %}
-									<li>{{ comment.message }}<br />
-										by {{ comment.author }}<br />
-										at {{ comment.created_at }}
-									<a href="{{ comment.get_edit_url }}">
+								{% for question_comment in question.comment_set.all %}
+									<li>{{ call_comment.message }}<br />
+										by {{ question_comment.author }}<br />
+										at {{ question_comment.created_at }}
+									<a href="{{ question_comment.get_edit_url }}">
 									수정
 								</a>
-							<a href="{{ comment.get_delete_url }}">
+							<a href="{{ question_comment.get_delete_url }}">
 									삭제
 								</a></li>
 								{% endfor %}</a>
 							</td>
 							<td class="date_board"><a href="#">{{ question.created_at }}</a>
 							</td>
-							<td><a href="{% url "blog:comment_new" question.pk %}"  class="logo">댓글쓰기</a>
+							<td><a href="{% url "blog:question_comment_new" question.pk %}"  class="logo">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}
 						
 						<button><a href="{% url "blog:question_new" %}"  class="logo">글쓰기</a></button>
-							
-						
 						
 					</tbody>
 					</table>
@@ -208,14 +206,14 @@
 								<a href="{% url "blog:call_detail" call.pk%}">{{ call.title }}</a>
 							</td>
 							<td class="name_board"><a href="{% url "blog:call_detail" call.pk %}">{{ call.contents|linebreaks }}
-								{% for comment in call.comment_set.all %}
-									<li>{{ comment.message }}<br />
-										by {{ comment.author }}<br/>
-										at {{ comment.created_at }}
-									<a href="{{ comment.get_edit_url }}">
+								{% for call_comment in call.comment_set.all %}
+									<li>{{ call_comment.message }}<br />
+										by {{ call_comment.author }}<br/>
+										at {{ call_comment.created_at }}
+									<a href="{{ call_comment.get_edit_url }}">
 									수정
 								</a>
-								<a href="{{ comment.get_delete_url }}">
+								<a href="{{ call_comment.get_delete_url }}">
 									삭제
 								</a>
 							</li>
@@ -223,7 +221,7 @@
 							</td>
 							<td class="date_board"><a href="#">{{ call.created_at }}</a>
 							</td>
-							<td><a href="{% url "blog:comment_new" call.pk %}" class="logo">댓글쓰기</a>
+							<td><a href="{% url "blog:call_comment_new" call.pk %}" class="logo">댓글쓰기</a>
 							</td>
 						</tr>
 						{% endfor %}

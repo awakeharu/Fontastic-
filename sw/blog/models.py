@@ -48,6 +48,13 @@ class Question(models.Model):
     class Meta:
     	ordering=['id']
 
+class question_Comment(models.Model):
+	question = models.ForeignKey(Question)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL)
+	message = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
 
 class Call(models.Model):
     title = models.CharField(max_length=30)
@@ -60,6 +67,16 @@ class Call(models.Model):
 
     class Meta:
     	ordering=['id']
+
+
+class call_Comment(models.Model):
+	call = models.ForeignKey(Call)
+	author = models.ForeignKey(settings.AUTH_USER_MODEL)
+	message = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True)
+	updated_at = models.DateTimeField(auto_now=True)
+
+    
 
 class Upload(models.Model):
 	photo = models.FileField()
