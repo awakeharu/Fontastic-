@@ -1,0 +1,32 @@
+{% extends "accounts/layout.html" %}
+{% block title %}{{ question.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ question.title }}</h1>
+
+{% if question.photo %}
+	<img src="{{ question.photo.url }}" />
+{% endif %}
+<hr />
+
+{{ question.contents|linebreaks }}
+
+<hr/>
+<center><h2>댓글</h2></center>
+{% for question_comment in question.question_comment_set.all %}
+	<center><li>
+		{{ question_comment.message }}<br />
+		by {{ question_comment.author }} 
+		at {{ question_comment.created_at }}<br/>
+		<a href="{{ question_comment.get_edit_url_question }}">
+		수정
+		</a>
+		<a href="{{ question_comment.get_delete_url_question }}">
+			삭제
+		</a>
+	</li></center>
+{% endfor %}
+<hr />
+<a href="{% url "blog:index" %}" class="btn btn-primary">목록으로</a>
+<a href="{% url "blog:question_comment_new" question.pk %}"  class="btn btn-primary">댓글쓰기</a>
+{% endblock %}

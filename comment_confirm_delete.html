@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}{{ post.title }}{% endblock %}
+{% block content %}
+<form action="" method="post">
+	{% csrf_token %}
+
+	<h2>정말 삭제하시겠습니까?</h2>
+
+	<input class="btn btn-primary" type="submit" value="삭제" />
+
+</form>
+{% endblock %}

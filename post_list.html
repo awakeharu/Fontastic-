@@ -1,0 +1,276 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>FonTastic</title>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+		<noscript><link rel="stylesheet" type="text/css" href="assets/css/noscript.css" /></noscript>	
+		<style>
+		tr, td {
+			font-family: "Source Sans Pro", Helvetica, sans-serif;
+			font-size: 0.8rem;
+			font-weight: 900;
+			letter-spacing: 0.075em;
+			line-height: 1.5;
+			padding: 0 0.75rem 0.75rem 0.75rem;
+			text-align: left;
+			text-transform: uppercase;
+		}
+		</style>
+	</head>
+
+	<body class = "is-loading">
+		{% block content %}
+		<div id = "wrapper" class = "fade-in">
+			<!--INTRO-->
+			<div id = "intro">
+				<h1>F O N T A S T I C</h1>
+				<p>In Fontastic, You can find font you want by image. </p>
+				<ul class = "actions">
+					<li><a href ="#header" class = "button icon solo fa-arrow-down scrolly">Continue</a></li>
+				</ul>
+			</div>
+
+		<!--Header-->
+			<header id = "header">
+				<a href= "#" class = "logo">FONTASTIC</a>
+			</header>
+
+			<nav id = "nav">
+				<ul class = "links">
+					<li class="actions"><a href ="#search_font" class="scrolly">SEARCH FONT<a></li>
+					<li class="actions"><a href ="#find_font" class="scrolly">FIND FONT</a></li>
+					<li class="actions"><a href ="#board" class="scrolly">BOARD</a></li>
+					<li class="actions"><a href ="#Q_A" class="scrolly">Q&A</a></li>
+					<li class="actions"><a href ="#request" class="scrolly">REQUEST</a></li>
+					{% if not user.is_authenticated %}
+          		<li><a href="{% url "login" %}?next={{ request.path }}">Login</a></li>
+          		<li><a href="{% url "signup" %}">Signup</a></li>
+          	{% else %}
+          		<li><a href="{% url "logout" %}?next={{ request.path }}">Logout</a></li>
+          		<li><a href="{% url "profile" %}">Profile</a></li>
+          	{% endif %}
+				</ul>
+				
+			</nav>
+		<!--main-->
+			<div id = "main">
+				<!--search font-->
+				<div id ="search_font">
+					<h2>SEARCH FONT</h2><br/>
+					
+					<table border ="1" cellspacing="0" summray="Search">
+						<colgroup>
+							<col width="150">
+							<col width="300">
+						</colgroup>
+						<thead>
+						<tr>
+							<th>Font Name</th>
+							<th>Font Download</th>
+						</tr>
+						</thead>
+						<tbody>
+							{% for search in search_list %}<tr>
+							<td class="title_board" style="padding-left:30px;">
+								<a href="#">{{ search.title }}</a>
+							</td>
+							<td style="padding-left:30px;">
+								<a href="#">{{ search.font_file}}</a>
+							</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<br/>
+					<form emthod='GET' action=''>
+					<input type="text" name="q" placeholder='Search fonts' />
+					<input type='submit' value='Search'/>
+					</form>
+				</div>
+			
+			<!--find font-->
+				<div id="find_font">
+					<h2>FIND FONT</h2>
+						<center><button><a href="{% url "blog:upload_new" %}" class="actions">UPLOAD</a></button></center>
+							<center><input type="submit" name="bt_find" value="FIND" id="bt_find"></center>
+					
+				</div>
+			
+			<!--board-->
+			<div id="section">
+				<div id ="board">
+					<h2>BOARD | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
+					<table border = "1" cellspacing ="0" summary="게시판">
+						<colgroup>
+						<col width="150">
+						<col width="200">
+						<col width="80">
+						<col width="70">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">제목</th>
+							<th scope="col">내용</th>
+							<th scope="col">날짜</th>
+							<th scope="col">댓글</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for post in post_list %}
+						<tr class="reply_borad">
+							<td class="title_board" style="padding-left:30px;">
+								<a href="{% url "blog:post_detail" post.pk%}">{{ post.title }}</a>
+							</td>
+							<td class="name_board"><a href="{% url "blog:post_detail" post.pk %}">{{ post.content|linebreaks }}
+								{% for comment in post.comment_set.all %}
+								<li>
+								{{ comment.message }}<br />
+								by {{ comment.author }}<br />
+								at {{ comment.created_at }}
+								<a href="{{ comment.get_edit_url_post }}">
+									수정
+								</a>
+								<a href="{{ comment.get_delete_url_post }}">
+									삭제
+								</a>
+								</li>
+								{% endfor %}</a>
+							</td>
+							<td class="date_board"><a href="#"><li>{{ post.created_at }}</li></a>
+							</td>
+							<td><a href="{% url "blog:comment_new" post.pk %}"  class="logo">댓글쓰기</a>
+							</td>
+						</tr>
+						{% endfor %}
+					
+						
+						<button><a href="{% url "blog:post_new" %}"  class="logo">글쓰기</a></button>
+							
+						
+						
+					</tbody>
+					</table>
+				</div>
+
+			<!--Q&A-->
+
+				<div id="Q_A">
+					<h2>Q&A | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
+					<table border = "1" cellspacing ="0" summary="게시판">
+						<colgroup>
+						<col width="150">
+						<col width="200">
+						<col width="80">
+						<col width="70">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">제목</th>
+							<th scope="col">내용</th>
+							<th scope="col">날짜</th>
+							<th scope="col">댓글</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for question in question_list %}
+						<tr class="reply_borad">
+							<td class="title_board" style="padding-left:30px;">
+								<a href="{% url "blog:question_detail" question.pk %}">{{ question.title }}</a>
+							</td>
+							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.contents|linebreaks }}
+								{% for question_comment in question.question_comment_set.all %}
+									<li>{{ question_comment.message }}<br />
+										by {{ question_comment.author }}<br />
+										at {{ question_comment.created_at }}
+									<a href="{{ question_comment.get_edit_url_question }}">
+									수정
+								</a>
+							<a href="{{ question_comment.get_delete_url_question }}">
+									삭제
+								</a></li>
+								{% endfor %}</a>
+							</td>
+							<td class="date_board"><a href="#">{{ question.created_at }}</a>
+							</td>
+							<td><a href="{% url "blog:question_comment_new" question.pk %}"  class="logo">댓글쓰기</a>
+							</td>
+						</tr>
+						{% endfor %}
+						
+						<button><a href="{% url "blog:question_new" %}"  class="logo">글쓰기</a></button>
+						
+					</tbody>
+					</table>
+				
+					
+				</div>
+			
+			<!--request-->
+				<div id="request">
+					<h2>REQUEST | <span><a href ="#nav" class="actions scrolly">MENU</a></span></h2>
+					<table border = "1" cellspacing ="0" summary="게시판">
+						<colgroup>
+						<col width="150">
+						<col width="200">
+						<col width="80">
+						<col width="70">
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">제목</th>
+							<th scope="col">내용</th>
+							<th scope="col">날짜</th>
+							<th scope="col">댓글</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for call in call_list %}
+						<tr class="reply_borad">
+							<td class="title_board" style="padding-left:30px;">
+								<a href="{% url "blog:call_detail" call.pk%}">{{ call.title }}</a>
+							</td>
+							<td class="name_board"><a href="{% url "blog:call_detail" call.pk %}">{{ call.contents|linebreaks }}
+								{% for call_comment in call.call_comment_set.all %}
+									<li>{{ call_comment.message }}<br />
+										by {{ call_comment.author }}<br/>
+										at {{ call_comment.created_at }}
+									<a href="{{ call_comment.get_edit_url_call }}">
+									수정
+								</a>
+								<a href="{{ call_comment.get_delete_url_call }}">
+									삭제
+								</a>
+							</li>
+								{% endfor %}</a>
+							</td>
+							<td class="date_board"><a href="#">{{ call.created_at }}</a>
+							</td>
+							<td><a href="{% url "blog:call_comment_new" call.pk %}" class="logo">댓글쓰기</a>
+							</td>
+						</tr>
+						{% endfor %}
+						
+						<button><a href="{% url "blog:call_new" %}" class="logo">글쓰기</a></button>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+		{% endblock %}
+	
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+
+
+		
+	</body>	
+</html>

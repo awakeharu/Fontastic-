@@ -1,0 +1,32 @@
+{% extends "accounts/layout.html" %}
+{% block title %}{{ call.title }}{% endblock %}
+
+{% block content %}
+<h1>{{ call.title }}</h1>
+
+{% if call.photo %}
+	<img src="{{ call.photo.url }}" />
+{% endif %}
+<hr />
+
+{{ call.contents|linebreaks }}
+
+<hr/>
+<center><h2>댓글</h2></center>
+{% for call_comment in call.call_comment_set.all %}
+	<center><li>
+		{{ call_comment.message }}<br />
+		by {{ call_comment.author }} 
+		at {{ call_comment.created_at }}<br/>
+		<a href="{{ call_comment.get_edit_url_call }}">
+		수정
+		</a>
+		<a href="{{ call_comment.get_delete_url_call }}">
+			삭제
+		</a>
+	</li></center>
+{% endfor %}
+<hr />
+<a href="{% url "blog:index" %}" class="btn btn-primary">목록으로</a>
+<a href="{% url "blog:call_comment_new" call.pk %}"  class="btn btn-primary">댓글쓰기</a>
+{% endblock %}
