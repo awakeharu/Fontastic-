@@ -23,7 +23,7 @@ urlpatterns = [
 
 	url(r'^question_new/$',views.question_new, name='question_new'),
 	url(r'^(?P<pk>\d+)/question/$',views.question_detail, name='question_detail'),
-	url(r'^(?P<question_pk>\d+)/question_comment/new/$', views.question_comment_new, name='quesiton_comment_new'),
+	url(r'^(?P<question_pk>\d+)/question_comment/new/$', views.question_comment_new, name='question_comment_new'),
 	url(r'^(?P<question_pk>\d+)/question_comment/(?P<pk>\d+)edit/$', views.question_comment_edit, name='question_comment_edit'),
 	url(r'^(?P<question_pk>\d+)/question_comment/(?P<pk>\d+)delete/$', views.question_comment_delete, name='question_comment_delete'),
 
