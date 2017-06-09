@@ -155,7 +155,7 @@
 							</td>
 							<td class="name_board"><a href="{% url "blog:question_detail" question.pk %}">{{ question.contents|linebreaks }}
 								{% for question_comment in question.comment_set.all %}
-									<li>{{ call_comment.message }}<br />
+									<li>{{ question_comment.message }}<br />
 										by {{ question_comment.author }}<br />
 										at {{ question_comment.created_at }}
 									<a href="{{ question_comment.get_edit_url }}">

@@ -20,12 +20,8 @@ def index(request):
 
 def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
-	question = get_object_or_404(Question, pk=pk)
-	call = get_object_or_404(Call, pk=pk)
 	return render(request, 'blog/post_detail.html', {
 			'post' : post,
-			'call' : call,
-			'question':question,
 		})
 
 def question_detail(request, pk):
@@ -136,7 +132,7 @@ def question_comment_new(request, question_pk):
 			question_comment.question = question
 			question_comment.author = request.user
 			question_comment.save()
-			return redirect('blog:post_detail', question.pk)
+			return redirect('blog:question_detail', question.pk)
 	else:
 		form = QuestionCommentForm()
 	return render(request, 'blog/question_comment_form.html', {
@@ -208,10 +204,10 @@ def call_comment_new(request, call_pk):
 		form = CommentForm(request.POST, request.FILES)
 		if form.is_valid():
 			call_comment = form.save(commit=False)
-			call_comment.post = call
+			call_comment.call = call
 			call_comment.author = request.user
 			call_comment.save()
-			return redirect('blog:post_detail', call.pk)
+			return redirect('blog:call_detail', call.pk)
 	else:
 		form = CallCommentForm()
 	return render(request, 'blog/call_comment_form.html', {
